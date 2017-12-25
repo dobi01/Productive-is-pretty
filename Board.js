@@ -1,5 +1,12 @@
+function initSortable() {
+    $('.card-list').sortable({
+      connectWith: '.card-list',
+      placeholder: 'card-placeholder'
+    }).disableSelection();
+  }
+
 var board = {
-	name: 'Tablica Kanban',
+	name: 'MyKanbanBoard',
 	createColumn: function(column) {
 	  this.element.append(column.element);
 	  initSortable();
@@ -22,10 +29,3 @@ $('.create-column')
       	}
     });
 });
-
-function initSortable() {
-    $('.card-list').sortable({
-      connectWith: '.card-list',
-      placeholder: 'card-placeholder'
-    }).disableSelection();
-  }
