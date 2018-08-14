@@ -1,4 +1,8 @@
-body {margin: 0;}
+body {
+  margin: 0;
+  background: url('/blue-sky-merge-clouds-675977.jpg') no-repeat center / cover;
+  height: 100vh;}
+
 * {box-sizing: border-box;}
 
 .ui-sortable {
@@ -15,7 +19,7 @@ body {margin: 0;}
   color: white;
 }
 /* BOARD */
-.board h1 {
+#board h1 {
   margin-left: 8px;
 }
 .column-container {
