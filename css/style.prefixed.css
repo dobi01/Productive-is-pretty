@@ -32,13 +32,17 @@ body {
 }
 
 .column-container {
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
 }
 
 .column {
-  order: 1;
+  -ms-flex-order: 1;
+      order: 1;
   min-width: 300px;
   min-height: 50vh;
   background-color: lightgrey;
@@ -80,5 +84,4 @@ body {
   border: 2px solid lightgrey;
   background-color: lightblue;
 }
-
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=style.prefixed.css.map */

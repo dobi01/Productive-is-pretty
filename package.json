@@ -1,5 +1,5 @@
 {
-  "name": "productive-is-hot",
+  "name": "productive-is-sexy",
   "version": "1.0.0",
   "description": "my own simple Trello",
   "main": "index.html",
@@ -23,14 +23,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dobi01/Productive-is-hot"
+    "url": "https://github.com/dobi01/Productive-is-sexy"
   },
   "author": "Dobi Okrasa",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dobi01/Productive-is-hot/issues"
+    "url": "https://github.com/dobi01/Productive-is-sexy/issues"
   },
-  "homepage": "https://dobi01.github.io/Productive-is-hot",
+  "homepage": "https://dobi01.github.io/Productive-is-sexy",
   "devDependencies": {
     "autoprefixer-cli": "^1.0.0",
     "browser-sync": "^2.24.6",
