@@ -3,27 +3,27 @@ function Card(id, columnId, name) {
   var self = this;
   this.id = id;
   this.columnId = columnId;
-	this.name = name || 'No name given';
-	this.element = createCard();
+  this.name = name || 'No name given';
+  this.element = createCard();
 
-	function createCard() {
-		var card = $('<li class="card"></li>'),
-		    cardDeleteBtn = $('<button type="button" class="btn-delete">x</button>'),
-		    cardDescription = $('<p class="card-description">' + self.name + '</p>');
+  function createCard() {
+    var card = $('<li class="card"></li>'),
+        cardDeleteBtn = $('<button type="button" class="btn-delete">x</button>'),
+        cardDescription = $('<p class="card-description">' + self.name + '</p>');
 
     cardDescription.click(function() {
       self.updateCardName();
     });
 
-		cardDeleteBtn.click(function(){
-			self.removeCard();
-		});
+    cardDeleteBtn.click(function(){
+      self.removeCard();
+    });
 
     card.append(cardDescription)
         .append(cardDeleteBtn);
     
-		return card;
-	}
+    return card;
+  }
 }
 
 Card.prototype = {
@@ -44,7 +44,7 @@ Card.prototype = {
     });
   },
 
-	removeCard: function() {
+  removeCard: function() {
     var self = this;
     
     $.ajax({
@@ -54,5 +54,5 @@ Card.prototype = {
         self.element.remove();
       }
     });
-	}
+  }
 }
