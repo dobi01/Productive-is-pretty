@@ -1,5 +1,5 @@
 function setupCards(col, cards) {
-	cards.forEach(function (card) {
+  cards.forEach(function (card) {
     var card = new Card(card.id, card.bootcamp_kanban_column_id, card.name);
     col.createCard(card);
   })
@@ -20,7 +20,7 @@ var baseUrl = 'https://kodilla.com/pl/bootcamp-api',
     };
 
 $.ajaxSetup({
-	headers: myHeaders
+  headers: myHeaders
 });
 
 $.ajax({
