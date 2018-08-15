@@ -2,15 +2,29 @@ function Column(id, name) {
   
   var self = this;
   this.id = id;
-  this.name = name || 'No name given';
+  this.name = name || getRandomTitle(colTitles);
   this.element = createColumn();
+
+  if (this.name) {
+    $.ajax({
+      url: baseUrl + '/column/' + self.id,
+      method: 'PUT',
+      data: {
+        name: this.name
+      },
+      success: function() {
+        self.element.find('h2').text(this.name);
+      }
+    });
+  }
 
   function createColumn() {
     var column = $('<div class="column"></div>'),
+        columnTitleAndBtn = $('<div class="column-title-and-btn"></div>'),
         columnTitle = $('<h2 class="column-title">' + self.name + '</h2>'),
         columnCardList = $('<ul class="card-list"></ul>'),
-        columnDelete = $('<button type="button" class="btn-delete">x</button>'),
-        columnAddCard = $('<button type="button" class="column-add-card">Dodaj kartę</button>');
+        columnDelete = $('<button type="button" class="btn-delete btn-delete-col">×</button>'),
+        columnAddCard = $('<button type="button" class="column-add-card">New task</button>');
 
     columnDelete.click(function() {
       self.deleteColumn();
@@ -37,9 +51,10 @@ function Column(id, name) {
       });
     });
 
-    column.append(columnTitle)
+    columnTitleAndBtn.append(columnTitle)
+                     .append(columnAddCard);
+    column.append(columnTitleAndBtn)
           .append(columnDelete)
-          .append(columnAddCard)
           .append(columnCardList);
 
     return column;
@@ -62,7 +77,7 @@ Column.prototype = {
         name: newColumnTitle
       },
       success: function() {
-        self.element.children('h2').text(newColumnTitle);
+        self.element.find('h2').text(newColumnTitle);
       }
     });
   },

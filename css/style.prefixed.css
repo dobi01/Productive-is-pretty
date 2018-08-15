@@ -1,87 +1,47 @@
-* {
-  box-sizing: border-box;
-  border: none;
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
+* { box-sizing: border-box; border: none; padding: 0; margin: 0; list-style-type: none; font-family: 'Unica One', cursive; outline: none !important; }
 
-body {
-  margin: 0;
-  background: #aaa;
-  height: 100vh;
-}
+#board .create-column, #board .column-container .column .column-title-and-btn .column-add-card { width: 70px; cursor: pointer; padding: 5px 8px; background: #ee04c7; border-radius: 5px; color: #fff; box-shadow: 1px 1px 0.5px 0px rgba(0, 0, 0, 0.75); transition: all .5s ease-in-out; }
 
-.ui-sortable {
-  min-height: 80px;
-}
+@keyframes h1-animate { 0% { text-shadow: none; }
+  50% { text-shadow: 6px 6px 0 #ff0ed7; }
+  100% { text-shadow: none; } }
 
-.btn-delete {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 22px;
-  height: 22px;
-  border: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  color: white;
-}
+body { background: #ee04c7; height: 100vh; width: 100vw; overflow-x: hidden; }
 
-#board h1 {
-  margin-left: 8px;
-}
+#board { padding: 15px 25px 20px; width: 100vw; }
 
-.column-container {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: row;
-      flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-}
+#board .create-column { margin: 20px 10px 10px; background: rgba(255, 255, 255, 0.9); color: #ee04c7; font-weight: bold; }
 
-.column {
-  -ms-flex-order: 1;
-      order: 1;
-  min-width: 300px;
-  min-height: 50vh;
-  background-color: lightgrey;
-  margin-left: 8px;
-  list-style: none;
-  position: relative;
-}
+#board .create-column:hover { background: #fff; }
 
-.column-add-card {
-  cursor: pointer;
-  text-decoration: underline;
-  margin: 5px 8px;
-  display: block;
-}
+#board h1 { font-size: 130px; color: rgba(255, 255, 255, 0.9); animation: h1-animate 5s infinite; transition: color .5s ease-in-out; }
 
-.card {
-  display: block;
-  height: 60px;
-  margin-bottom: 5px;
-  padding: 4px;
-  overflow: hidden;
-  position: relative;
-}
+#board h1:hover { color: #fff; }
 
-.card-list {
-  list-style: none;
-  margin: 5px;
-  padding: 0px;
-}
+#board .btn-delete { outline: none !important; position: absolute; right: 0; top: 0; height: 30px; line-height: 32px; color: #ee04c7; background: rgba(255, 255, 255, 0); font-size: 35px; cursor: pointer; }
 
-.card-description {
-  margin: 2px 0;
-}
+#board .btn-delete-col { width: 30px; padding-top: 10px; padding-right: 8px; font-size: 40px; }
 
-.card-placeholder {
-  display: block;
-  height: 60px;
-  margin-bottom: 5px;
-  border: 2px solid lightgrey;
-  background-color: lightblue;
-}
-/*# sourceMappingURL=style.prefixed.css.map */
+#board .column-container { display: -ms-flexbox; display: flex; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: wrap; flex-wrap: wrap; }
+
+#board .column-container .column { -ms-flex-order: 1; order: 1; min-width: 350px; min-height: 40vh; background-color: rgba(255, 255, 255, 0.9); margin: 5px 20px 25px 10px; position: relative; padding: 11px 10px 11px 14px; box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.75); }
+
+#board .column-container .column:last-of-type { margin-right: 50px; }
+
+#board .column-container .column .column-title-and-btn { position: relative; width: 100%; }
+
+#board .column-container .column .column-title-and-btn h2 { font-size: 35px; line-height: 40px; height: 40px; display: inline-block; margin-bottom: 10px; overflow: hidden; }
+
+#board .column-container .column .column-title-and-btn .column-add-card { position: absolute; margin: 8px 20px; display: inline-block; }
+
+#board .column-container .column .column-title-and-btn .column-add-card:hover { background: #ff0ed7; }
+
+#board .column-container .column .card-list:hover { cursor: move; cursor: -webkit-grab; cursor: grab; }
+
+#board .column-container .column .card-list:active { cursor: -webkit-grabbing; cursor: grabbing; }
+
+#board .column-container .column .card-list .card { padding-right: 35px; display: block; height: 30px; margin-bottom: 10px; overflow: hidden; position: relative; }
+
+#board .column-container .column .card-list .card .card-description { height: 30px; line-height: 32px; font-size: 20px; cursor: pointer; }
+
+#board .column-container .column .card-list .card-placeholder { display: block; height: 30px; margin-bottom: 10px; background-color: rgba(238, 4, 199, 0.3); }

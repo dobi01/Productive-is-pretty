@@ -4,79 +4,151 @@
   padding: 0;
   margin: 0;
   list-style-type: none;
+  font-family: 'Unica One', cursive;
+  outline: none !important;
+}
+
+$pink: rgb(238, 4, 199);
+$pink-brighter: rgb(255, 14, 215);
+
+%btn-pink {
+  width: 70px;
+  cursor: pointer;
+  padding: 5px 8px;
+  background: $pink;
+  border-radius: 5px;
+  color: #fff;
+  -webkit-box-shadow: 1px 1px .5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 1px .5px 0px rgba(0,0,0,0.75);
+  box-shadow: 1px 1px .5px 0px rgba(0,0,0,0.75);
+  transition: all .5s ease-in-out;
+}
+
+@keyframes h1-animate {
+  0% { text-shadow: none; }
+  50% { text-shadow: 6px 6px 0 $pink-brighter; }
+  100% { text-shadow: none; }
 }
 
 body {
-  margin: 0;
-  background: #aaa;
+  background: $pink;
   height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
-.ui-sortable {
-  min-height: 80px;
-}
-
-.btn-delete {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 22px;
-  height: 22px;
-  border: 0;
-  background-color: rgba(0,0,0,0.4);
-  color: white;
-}
-
-#board h1 {
-  margin-left: 8px;
-}
-
-.column-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-}
-
-.column {
-  order: 1;
-  min-width: 300px;
-  min-height: 50vh;
-  background-color: lightgrey;
-  margin-left: 8px;
-  list-style: none;
-  position: relative;
-}
-
-.column-add-card {
-  cursor: pointer;
-  text-decoration: underline;
-  margin: 5px 8px;
-  display: block;
-}
-
-.card {
-  display: block;
-  height: 60px;
-  margin-bottom: 5px;
-  padding: 4px;
-  overflow: hidden;
-  position: relative;
-}
-
-.card-list {
-  list-style: none;
-  margin: 5px;
-  padding: 0px;
-}
-
-.card-description {
-  margin: 2px 0;
-}
-
-.card-placeholder {
-  display: block;
-  height: 60px;
-  margin-bottom: 5px;
-  border: 2px solid lightgrey;
-  background-color: lightblue;
+#board {
+  padding: 15px 25px 20px;
+  width: 100vw;
+  .create-column {
+    @extend %btn-pink;
+    margin: 20px 10px 10px;
+    background: rgba(255, 255, 255, .9);
+    color: $pink;
+    font-weight: bold;
+    &:hover {
+      background: #fff;
+    }
+  }
+  h1 {
+    font-size: 130px;
+    color: rgba(255, 255, 255, .9);
+    animation: h1-animate 5s infinite;
+    transition: color .5s ease-in-out;
+    &:hover {
+      color: #fff;
+    }
+  }
+  .btn-delete {
+    outline: none !important;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 30px;
+    line-height: 32px;
+    color: $pink;
+    background: rgba(255, 255, 255, 0);
+    font-size: 35px;
+    cursor: pointer;
+  }
+  .btn-delete-col {
+    width: 30px;
+    padding-top: 10px;
+    padding-right: 8px;
+    font-size: 40px;
+  }
+  .column-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .column {
+      order: 1;
+      min-width: 350px;
+      min-height: 40vh;
+      background-color: rgba(255, 255, 255, .9);
+      margin: 5px 20px 25px 10px;
+      position: relative;
+      padding: 11px 10px 11px 14px;
+      -webkit-box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.75);
+      -moz-box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.75);
+      box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.75);
+      &:last-of-type {
+        margin-right: 50px;
+      }
+      .column-title-and-btn {
+        position: relative;
+        width: 100%;
+        h2 {
+          font-size: 35px;
+          line-height: 40px;
+          height: 40px;
+          display: inline-block;
+          margin-bottom: 10px;
+          overflow: hidden;
+        }
+        .column-add-card {
+          position: absolute;
+          margin: 8px 20px;
+          display: inline-block;
+          @extend %btn-pink;
+          &:hover {
+            background: $pink-brighter;
+          }
+        }
+      }
+      .card-list {
+        &:hover {
+          cursor: move; 
+          cursor: -webkit-grab; 
+          cursor:    -moz-grab;
+          cursor:         grab;
+        }
+        &:active {
+          cursor: -webkit-grabbing;
+          cursor:    -moz-grabbing;
+          cursor:         grabbing;
+        }
+        .card {
+          padding-right: 35px;
+          display: block;
+          height: 30px;
+          margin-bottom: 10px;
+          overflow: hidden;
+          position: relative;
+          .card-description {
+            height: 30px;
+            line-height: 32px;
+            font-size: 20px;
+            cursor: pointer;
+          }
+        }
+        .card-placeholder {
+          display: block;
+          height: 30px;
+          margin-bottom: 10px;
+          background-color: rgba(238, 4, 199, .3);
+        }
+      }
+    }
+  }
 }

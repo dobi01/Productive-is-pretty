@@ -3,13 +3,27 @@ function Card(id, columnId, name) {
   var self = this;
   this.id = id;
   this.columnId = columnId;
-  this.name = name || 'No name given';
+  this.name = name || getRandomTitle(cardTitles);
   this.element = createCard();
+
+  if (this.name) {
+    $.ajax({
+      url: baseUrl + '/card/' + self.id,
+      method: 'PUT',
+      data: {
+        name: this.name,
+        bootcamp_kanban_column_id: self.columnId
+      },
+      success: function() {
+        self.element.children('span').text(this.name);
+      }
+    });
+  }
 
   function createCard() {
     var card = $('<li class="card"></li>'),
-        cardDeleteBtn = $('<button type="button" class="btn-delete">x</button>'),
-        cardDescription = $('<p class="card-description">' + self.name + '</p>');
+        cardDeleteBtn = $('<button type="button" class="btn-delete">×</button>'),
+        cardDescription = $('<span class="card-description">' + self.name + '</span>');
 
     cardDescription.click(function() {
       self.updateCardName();
@@ -39,7 +53,7 @@ Card.prototype = {
         bootcamp_kanban_column_id: self.columnId
       },
       success: function() {
-        self.element.children('p').text(newCardName);
+        self.element.children('span').text(newCardName);
       }
     });
   },
@@ -55,4 +69,4 @@ Card.prototype = {
       }
     });
   }
-}
+};
