@@ -13,7 +13,10 @@ function Column(id, name) {
         name: this.name
       },
       success: function() {
-        self.element.find('h2').text(this.name);
+        var columnTitle = self.element.find('.column-title'),
+            columnTitleWidth = self.name.length + "ch";
+        columnTitle.val(self.name);
+        columnTitle.width(columnTitleWidth);
       }
     });
   }
@@ -21,7 +24,7 @@ function Column(id, name) {
   function createColumn() {
     var column = $('<div class="column"></div>'),
         columnTitleAndBtn = $('<div class="column-title-and-btn"></div>'),
-        columnTitle = $('<h2 class="column-title">' + self.name + '</h2>'),
+        columnTitle = $('<input class="column-title" maxlength="12"/>'),
         columnCardList = $('<ul class="card-list"></ul>'),
         columnDelete = $('<button type="button" class="btn-delete btn-delete-col">×</button>'),
         columnAddCard = $('<button type="button" class="column-add-card">New task</button>');
@@ -30,12 +33,21 @@ function Column(id, name) {
       self.deleteColumn();
     });
 
-    columnTitle.click(function() {
+    columnTitle.blur(function() {
       self.updateColumnTitle();
+      self.onTitleUpdate();
+    });
+
+    columnTitle.keydown(function(e) {
+      self.onTitleUpdate();
+      if (event.which == 13 || event.keyCode == 13) {
+        self.updateColumnTitle();
+        columnTitle.blur();
+      }
     });
 
     columnAddCard.click(function() {
-      var cardName = prompt("Enter the name of the card");
+      var cardName = '';
 
       $.ajax({
         url: baseUrl + '/card',
@@ -68,8 +80,9 @@ Column.prototype = {
 
   updateColumnTitle: function() {
     var self = this,
-        newColumnTitle = prompt("Enter new column title");
-
+        newColumnTitle = self.element.find('.column-title').val();
+        if (!newColumnTitle) newColumnTitle = '???';
+        
     $.ajax({
       url: baseUrl + '/column/' + self.id,
       method: 'PUT',
@@ -77,9 +90,15 @@ Column.prototype = {
         name: newColumnTitle
       },
       success: function() {
-        self.element.find('h2').text(newColumnTitle);
+        self.element.find('.column-title').val(newColumnTitle);
       }
     });
+  },
+
+  onTitleUpdate: function() {
+    var columnTitle = this.element.find('.column-title'),
+        columnTitleWidth = columnTitle.val().length + "ch";
+    columnTitle.width(columnTitleWidth);
   },
 
   deleteColumn: function() {

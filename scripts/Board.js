@@ -6,7 +6,6 @@ function initSortable() {
 }
 
 var board = {
-  name: 'MyKanbanBoard',
   createColumn: function(column) {
     this.element.append(column.element);
     initSortable();
@@ -16,8 +15,7 @@ var board = {
 
 $('.create-column')
   .click(function() {
-    var columnName = prompt('Enter a column name');
-	
+    var columnName = '';
     $.ajax({
       url: baseUrl + '/column',
       method: 'POST',

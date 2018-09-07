@@ -1,7 +1,10 @@
-var colTitles = ["I'm...", 'My workout', 'My love', 'My passion', 'My family', 'My journey', 'My pleasure'],
+var colTitles = ["I'm...", 'My workout', 'My love', 'My passion', 'My family', 'My journey', 
+                'My pleasure', 'My mind', 'My body', 'My dreams', 'My home', 'My work'],
     cardTitles = ['breathe', 'walk for 10 min', 'clean bathroom', 'kiss', 'do something new', 
                   'turn off your phone', 'learn something new', 'smile', 'stretch out', 
-                  'turn off Internet', 'read a book', 'look into the sky'];
+                  'turn off the Internet', 'read a book', 'look into the sky', 'catch some sun',
+                  'have wild sex', 'wash the dishes', 'just be', 'be present', 'get dirty', 
+                  'listen to yourself', 'plan your week', 'plan your day', 'talk to a stranger'];
 
 function getRandomTitle(titles) {
   return titles[(Math.floor(Math.random() * titles.length))];

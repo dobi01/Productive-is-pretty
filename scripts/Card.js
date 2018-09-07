@@ -15,7 +15,10 @@ function Card(id, columnId, name) {
         bootcamp_kanban_column_id: self.columnId
       },
       success: function() {
-        self.element.children('span').text(this.name);
+        var cardDescription = self.element.find('.card-description'),
+            cardDescriptionWidth = self.name.length + "ch";
+        cardDescription.val(self.name);
+        cardDescription.width(cardDescriptionWidth);
       }
     });
   }
@@ -23,10 +26,23 @@ function Card(id, columnId, name) {
   function createCard() {
     var card = $('<li class="card"></li>'),
         cardDeleteBtn = $('<button type="button" class="btn-delete">×</button>'),
-        cardDescription = $('<span class="card-description">' + self.name + '</span>');
+        cardDescription = $('<input class="card-description" maxlength="30"/>');
 
     cardDescription.click(function() {
-      self.updateCardName();
+      self.updateCardDescription();
+    });
+
+    cardDescription.blur(function() {
+      self.updateCardDescription();
+      self.onTitleUpdate();
+    });
+
+    cardDescription.keydown(function(e) {
+      self.onTitleUpdate();
+      if (event.which == 13 || event.keyCode == 13) {
+        self.updateCardDescription();
+        cardDescription.blur();
+      }
     });
 
     cardDeleteBtn.click(function(){
@@ -41,10 +57,10 @@ function Card(id, columnId, name) {
 }
 
 Card.prototype = {
-  updateCardName: function() {
+  updateCardDescription: function() {
     var self = this,
-        newCardName = prompt("Enter new card title");
-
+        newCardName = self.element.find('.card-description').val();
+        if (!newCardName) newCardName = '???';
     $.ajax({
       url: baseUrl + '/card/' + self.id,
       method: 'PUT',
@@ -53,9 +69,15 @@ Card.prototype = {
         bootcamp_kanban_column_id: self.columnId
       },
       success: function() {
-        self.element.children('span').text(newCardName);
+        self.element.find('.card-description').val(newCardName);
       }
     });
+  },
+
+  onTitleUpdate: function() {
+    var cardDescription = this.element.find('.card-description'),
+        cardDescriptionWidth = cardDescription.val().length + "ch";
+    cardDescription.width(cardDescriptionWidth);
   },
 
   removeCard: function() {
