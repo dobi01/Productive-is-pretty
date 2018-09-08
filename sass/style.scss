@@ -25,10 +25,27 @@ $pink-brighter: rgb(255, 14, 215);
   backface-visibility: hidden;
 }
 
-@keyframes h1-animate {
-  0% { text-shadow: none; opacity: .5; }
-  50% { text-shadow: 143px 0 0 $pink-brighter; opacity: 1;}
-  100% { text-shadow: none; opacity: .5; }
+@mixin keyframes($h1-animate) {
+  @keyframes h1-animate {
+    0% { text-shadow: none; opacity: .5; }
+    50% { text-shadow: $h1-animate 0 0 $pink-brighter; opacity: 1;}
+    100% { text-shadow: none; opacity: .5; }
+  }
+}
+
+@include keyframes(220px);
+
+@media (max-width: 1920px) {
+  @include keyframes(162px); 
+}
+@media (max-width: 900px) {
+  @include keyframes(143px); 
+}
+@media (max-width: 640px) {
+  @include keyframes(90px); 
+}
+@media (max-width: 374px) {
+  @include keyframes(80px); 
 }
 
 ::-webkit-scrollbar {
@@ -47,7 +64,22 @@ $pink-brighter: rgb(255, 14, 215);
 }
 
 body {
-  background: url(../img/abstract-art-background-696644-double.jpg) left top repeat / cover;
+  background: url(../img/abstract-art-background-696644-double_2592px.jpg) left top repeat;
+  @media (max-width: 1920px) {
+    background: url(../img/abstract-art-background-696644-double_1920px.jpg) left top repeat;
+  }
+  @media (max-width: 1200px) {
+    background: url(../img/abstract-art-background-696644-double_1200px.jpg) left top repeat;
+  }
+  @media (max-width: 900px) {
+    background: url(../img/abstract-art-background-696644-double_900px.jpg) left top repeat;
+  }
+  @media (max-width: 640px) {
+    background: url(../img/abstract-art-background-696644-double_640px.jpg) left top repeat;
+  }
+  @media (max-width: 375px) {
+    background: url(../img/abstract-art-background-696644-double_375px.jpg) left top repeat;
+  }
   background-color: #fff;
   height: 100vh;
   width: 100vw;
@@ -55,20 +87,37 @@ body {
 }
 
 #board {
-  padding: 15px 25px 20px;
+  padding: 15px 50px 20px;
   width: 100vw;
+  @media (max-width: 640px) {
+    padding: 15px 25px 20px;
+  }
+  @media (max-width: 440px) {
+    padding: 15px 10px 20px;
+  }
+  @media (max-width: 405px) {
+    padding: 15px 5px 20px 3px;
+  }
   .create-column {
     @extend %btn-pink;
-    margin: 150px 10px 10px;
+    margin: 200px 10px 10px;
     background: rgba(255, 255, 255, .9);
     color: $pink;
     font-weight: bold;
     &:hover {
       background: #fff;
     }
+    @media (max-width: 640px) {
+      margin: 130px 10px 10px;
+    }
+    @media (max-width: 374px) {
+      margin: 90px 10px 10px;
+    }
   }
   h1 {
-    font-size: 65px;
+    font-size: 100px;
+    padding-top: 15px;
+    padding-left: 5px;
     color: rgba(255, 255, 255, .9);
     transition: color .5s ease-in-out;
     cursor: default;
@@ -78,11 +127,26 @@ body {
       animation-duration: 2s;
       opacity: .5;
     }
+    @media (max-width: 1920px) {
+      font-size: 75px;
+      padding-top: 5px;
+    }
+    @media (max-width: 900px) {
+      font-size: 65px;
+      padding-top: 0;
+    }
+    @media (max-width: 640px) {
+      font-size: 40px;
+      padding-left: 8px;
+    }
+    @media (max-width: 374px) {
+      font-size: 35px;
+    }
   }
   .btn-delete {
     outline: none !important;
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 0;
     height: 30px;
     line-height: 32px;
@@ -95,12 +159,24 @@ body {
     &:hover {
       transform: scale(1.1);
     }
+    @media (max-width: 405px) {
+      right: 5px;
+      top: -1.5px;
+    }
   }
   .btn-delete-col {
+    right: 0px;
     width: 30px;
     padding-top: 10px;
     padding-right: 8px;
     font-size: 40px;
+    z-index: 10;
+    @media (max-width: 640px) {
+      padding-top: 14.5px;
+    }
+    @media (max-width: 405px) {
+      right: -5px;
+    }
   }
   .column-container {
     display: flex;
@@ -115,12 +191,16 @@ body {
       background-color: rgba(255, 255, 255, .9);
       margin: 5px 20px 25px 10px;
       position: relative;
-      padding: 11px 10px 11px 14px;
+      padding: 11px 0px 11px 14px;
       -webkit-box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.75);
       -moz-box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.75);
       box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.75);
       &:last-of-type {
         margin-right: 50px;
+      }
+      @media (max-width: 405px) {
+        min-height: 133px;
+        margin: 5px 20px 15px 10px;
       }
       .column-title-and-btn {
         position: relative;
@@ -135,14 +215,41 @@ body {
           margin-bottom: 10px;
           overflow: hidden;
           background: inherit;
+          @media (max-width: 640px) {
+            font-size: 30px;
+          }
+          @media (max-width: 405px) {
+            line-height: 28px;
+            font-size: 23px;
+          }
         }
-        .column-add-card {
+        .column-add-card, .column-add-card::after {
           position: absolute;
           margin: 8px 20px 5px 8px;
           display: inline-block;
           @extend %btn-pink;
           &:hover {
             background: $pink-brighter;
+          }
+        }
+        .column-add-card {
+          @media (max-width: 640px) {
+            visibility: hidden;
+          }
+        }
+        .column-add-card::after {
+          visibility: hidden;
+          @media (max-width: 640px) {
+            content: '+';
+            visibility: visible;
+            font-size: 33px;
+            padding: 4px 3.5px 3px 3px;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            top: -8.5px;
+            left: 0;
+            margin-left: 3px;
           }
         }
       }
@@ -165,6 +272,10 @@ body {
           margin-bottom: 10px;
           overflow: hidden;
           position: relative;
+          @media (max-width: 405px) {
+            padding-right: 15px;
+            margin-bottom: 0;
+          }
           .card-description {
             height: 30px;
             line-height: 32px;
@@ -173,6 +284,12 @@ body {
             max-width: 326px;
             background: inherit;
             cursor: pointer;
+            @media (max-width: 405px) {
+              // height: 24px;
+              // line-height: 26px;
+              font-size: 16px;
+              max-width: 240px;
+            }
           }
         }
         .card-placeholder {

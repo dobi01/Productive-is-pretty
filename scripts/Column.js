@@ -17,6 +17,7 @@ function Column(id, name) {
             columnTitleWidth = self.name.length + "ch";
         columnTitle.val(self.name);
         columnTitle.width(columnTitleWidth);
+        columnTitle.focus();  
       }
     });
   }
@@ -24,7 +25,7 @@ function Column(id, name) {
   function createColumn() {
     var column = $('<div class="column"></div>'),
         columnTitleAndBtn = $('<div class="column-title-and-btn"></div>'),
-        columnTitle = $('<input class="column-title" maxlength="12"/>'),
+        columnTitle = $('<input type="text" class="column-title" maxlength="12" spellcheck="false" />'),
         columnCardList = $('<ul class="card-list"></ul>'),
         columnDelete = $('<button type="button" class="btn-delete btn-delete-col">×</button>'),
         columnAddCard = $('<button type="button" class="column-add-card">New task</button>');
