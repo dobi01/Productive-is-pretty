@@ -254,6 +254,7 @@ body {
         }
       }
       .card-list {
+        min-height: 50px;
         &:hover {
           cursor: move; 
           cursor: -webkit-grab; 

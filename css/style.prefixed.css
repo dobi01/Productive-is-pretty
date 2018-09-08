@@ -394,6 +394,10 @@ body {
   }
 }
 
+#board .column-container .column .card-list {
+  min-height: 50px;
+}
+
 #board .column-container .column .card-list:hover {
   cursor: move;
   cursor: -webkit-grab;

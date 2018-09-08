@@ -64,6 +64,8 @@ function Column(id, name) {
       });
     });
 
+    columnCardList.attr('id', self.id);
+
     columnTitleAndBtn.append(columnTitle)
                      .append(columnAddCard);
     column.append(columnTitleAndBtn)

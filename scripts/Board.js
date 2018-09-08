@@ -1,5 +1,6 @@
 function initSortable() {
   $('.card-list').sortable({
+    revert: true,
     connectWith: '.card-list',
     placeholder: 'card-placeholder'
   }).disableSelection();
@@ -20,7 +21,7 @@ $('.create-column')
       url: baseUrl + '/column',
       method: 'POST',
       data: {
-       name: columnName
+        name: columnName
       },
       success: function(response) {
         var column = new Column(response.id, columnName);

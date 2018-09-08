@@ -50,6 +50,10 @@ function Card(id, columnId, name) {
       self.removeCard();
     });
 
+    $('.card-list').on( "sortstop", function() {
+      self.updateCardDescription();
+    });
+    
     card.append(cardDescription)
         .append(cardDeleteBtn);
     
@@ -60,14 +64,16 @@ function Card(id, columnId, name) {
 Card.prototype = {
   updateCardDescription: function() {
     var self = this,
-        newCardName = self.element.find('.card-description').val();
+        newCardName = self.element.find('.card-description').val(),
+        currentColumnId = self.element.parent().attr('id');
+
         if (!newCardName) newCardName = '???';
     $.ajax({
       url: baseUrl + '/card/' + self.id,
       method: 'PUT',
       data: {
         name: newCardName,
-        bootcamp_kanban_column_id: self.columnId
+        bootcamp_kanban_column_id: currentColumnId
       },
       success: function() {
         self.element.find('.card-description').val(newCardName);
