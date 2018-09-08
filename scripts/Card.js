@@ -19,6 +19,7 @@ function Card(id, columnId, name) {
             cardDescriptionWidth = self.name.length + "ch";
         cardDescription.val(self.name);
         cardDescription.width(cardDescriptionWidth);
+        cardDescription.focus();
       }
     });
   }
@@ -26,7 +27,7 @@ function Card(id, columnId, name) {
   function createCard() {
     var card = $('<li class="card"></li>'),
         cardDeleteBtn = $('<button type="button" class="btn-delete">×</button>'),
-        cardDescription = $('<input class="card-description" maxlength="30"/>');
+        cardDescription = $('<input type="text" class="card-description" maxlength="30" spellcheck="false" />');
 
     cardDescription.click(function() {
       self.updateCardDescription();
